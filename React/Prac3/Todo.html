@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #input-container {
+            width: 50%;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            padding: 20px;
+            gap: 10px;
+            border: 1px solid;
+            margin: auto;
+        }
+
+        #input-container>input {
+            width: 100;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+
+    const InputComponent = () => {
+
+        const [todo, setTodo] = React.useState("")
+        const [user, setUser] = React.useState("")
+        const [data, setData] = React.useState([])
+
+
+        const handleTodoChange = (e) => {
+            setTodo(e.target.value);
+        }
+
+        const handleUserChange = (e) => {
+            setUser(e.target.value);
+        }
+
+        const handleSave = () => {
+            let obj = {
+                todo,
+                user
+            }
+
+            setData((init) => [...init, obj])
+
+        }
+        console.log(data);
+        return (
+            <>
+                <div id="input-container">
+                    <input onChange={handleTodoChange} placeholder="enter todo" />
+                    <input onChange={handleUserChange} placeholder="username" />
+                    <button onClick={handleSave}>Save Todo</button>
+                </div>
+
+
+                <div>
+
+                    <table border={1} >
+                        <thead>
+                            <th>S.no</th>
+                            <th>Todo name</th>
+                            <th>User name</th>
+                        </thead>
+
+                        <tbody>
+                            {
+                                data.map((ele, i) => {
+                                    return (
+                                        <tr>
+                                            <td>{i + 1}</td>
+                                            <td>{ele.todo}</td>
+                                            <td>{ele.user}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </>
+
+
+        )
+    }
+
+
+    const App = () => {
+        return (
+            <InputComponent />
+        )
+    }
+
+    let root = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App />)
+
+</script>
+
+</html>

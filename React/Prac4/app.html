@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/babel">
+
+const Form=()=>{
+
+    let url="https://ferc-db-f9d68-default-rtdb.asia-southeast1.firebasedatabase.app/user.json"
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+        let Username=e.target[0].value
+        let Email=e.target[1].value
+        let Age =e.target[2].value
+
+        let obj={Username,Email,Age}
+        
+
+    axios.post(url ,obj)
+    .then(()=>{
+        alert("Data is updated on DB")
+    })
+    .catch((error)=>{
+        console.log(error)
+    })
+    }
+    return(
+        <div> 
+            <form onSubmit={handleSubmit}>
+            <input placeholder="Username"/>
+            <input placeholder="Email"/>
+            <input placeholder="Age"/>
+            <input type="Submit"/>
+            </form>
+            </div> 
+          )
+}
+
+const Displaydata=()=>{
+    return(
+        <div>
+           <h2>Display data...!</h2> 
+        </div>
+    )
+}
+
+const Dashboard=()=>{
+    let[page ,setPage] =React.useState("Form")
+    return(
+        <div>
+             <button onClick={()=>setPage(page=="Form"? "Data":"Form")}>{page}</button>
+             {
+                page=="Form" ?
+                <Form/>
+                :
+                <Displaydata/>
+             }
+        
+        </div>
+    )
+}
+const App=()=>{
+    return(
+        <div>
+           <Dashboard/>
+        </div>
+
+    )
+}
+    
+    let root  = ReactDOM.createRoot(document.getElementById("root"))
+    root.render(<App/>)
+</script>
+
+</html>

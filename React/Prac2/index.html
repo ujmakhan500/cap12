@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #nav-container{
+            width: 100%;
+            background-color: aqua;
+            padding: 20px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        #container{
+            width: 100%;
+            display: flex;
+        }
+
+        #sidebar{
+            width: 30% ;
+            background-color: rgb(96, 96, 221);
+            height: 100vh;
+        }
+        #content{
+            width: 70%;
+            background-color: tomato;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap:50px;
+            height: 100vh;
+            overflow: scroll;
+        }
+        #content>div>img{
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="root">
+
+    </div>
+    
+</body>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel" >
+
+
+// destructing
+// spreading
+// let arr = [1,2,3]
+
+// let arr2 = [5,6,7]
+
+// let narr = [...arr , ...arr2]
+
+// Rest Parameter
+
+
+const Navbar = ({user , time})=>{
+// props => obj = {user : username , time : time}
+
+    return(
+        <div id="nav-container">
+            <button>{user}</button>
+            <button>{time}</button>
+            <button>press</button>
+            <button>press</button>
+        </div>
+    )
+}   
+
+const Sidebar = ()=>{
+    let count = 0
+
+    // hooks => useState
+
+    function handleDec(){
+        count -= 1
+        console.log(count)
+    }
+    function handleInc(){
+        count += 1
+        console.log(count)
+    }
+    return (
+        <div id="sidebar">
+            <ul>
+              <li>Home</li>
+              <li>About</li>
+              <li>Contact</li>
+              <li>Analytics</li>    
+            </ul> 
+
+            <div>
+                <button onClick={handleDec}>dec</button>
+                <h2>{count}</h2>
+                <button onClick={handleInc}>Inc</button>
+            </div>
+        </div>
+    )
+}
+
+const Content = ({items , data})=>{
+    return (
+
+
+        <div id="content">
+
+            
+
+            {
+
+                data.map((ele)=>{
+                    return(
+                        <div>
+                            <img src={ele.download_url}  / >
+                            <p>Author is : <b>{ele.author}</b></p>
+                        </div>    
+                    )
+                })
+
+            }
+          
+        </div>
+    )
+}
+
+const App = ()=>{
+    let userName = "raju"
+    let time = "11:45 pm"
+
+    let items = ["apples" , "oranges" , 'pineapple' , 'grapes']
+
+    let data = [
+  {
+    "id": "0",
+    "author": "Alejandro Escamilla",
+    "width": 5000,
+    "height": 3333,
+    "url": "https://unsplash.com/photos/yC-Yzbqy7PY",
+    "download_url": "https://picsum.photos/id/0/5000/3333"
+  },
+  {
+    "id": "1",
+    "author": "Alejandro Escamilla",
+    "width": 5000,
+    "height": 3333,
+    "url": "https://unsplash.com/photos/LNRyGwIJr5c",
+    "download_url": "https://picsum.photos/id/1/5000/3333"
+  },
+  {
+    "id": "2",
+    "author": "Alejandro Escamilla",
+    "width": 5000,
+    "height": 3333,
+    "url": "https://unsplash.com/photos/N7XodRrbzS0",
+    "download_url": "https://picsum.photos/id/2/5000/3333"
+  },
+  {
+    "id": "3",
+    "author": "Alejandro Escamilla",
+    "width": 5000,
+    "height": 3333,
+    "url": "https://unsplash.com/photos/Dl6jeyfihLk",
+    "download_url": "https://picsum.photos/id/3/5000/3333"
+  },
+  {
+    "id": "4",
+    "author": "Alejandro Escamilla",
+    "width": 5000,
+    "height": 3333,
+    "url": "https://unsplash.com/photos/y83Je1OC6Wc",
+    "download_url": "https://picsum.photos/id/4/5000/3333"
+  },
+  {
+    "id": "5",
+    "author": "Alejandro Escamilla",
+    "width": 5000,
+    "height": 3334,
+    "url": "https://unsplash.com/photos/LF8gK8-HGSg",
+    "download_url": "https://picsum.photos/id/5/5000/3334"
+  },
+  {
+    "id": "6",
+    "author": "Alejandro Escamilla",
+    "width": 5000,
+    "height": 3333,
+    "url": "https://unsplash.com/photos/tAKXap853rY",
+    "download_url": "https://picsum.photos/id/6/5000/3333"
+  },
+  {
+    "id": "7",
+    "author": "Alejandro Escamilla",
+    "width": 4728,
+    "height": 3168,
+    "url": "https://unsplash.com/photos/BbQLHCpVUqA",
+    "download_url": "https://picsum.photos/id/7/4728/3168"
+  },
+  {
+    "id": "8",
+    "author": "Alejandro Escamilla",
+    "width": 5000,
+    "height": 3333,
+    "url": "https://unsplash.com/photos/xII7efH1G6o",
+    "download_url": "https://picsum.photos/id/8/5000/3333"
+  },
+  {
+    "id": "9",
+    "author": "Alejandro Escamilla",
+    "width": 5000,
+    "height": 3269,
+    "url": "https://unsplash.com/photos/ABDTiLqDhJA",
+    "download_url": "https://picsum.photos/id/9/5000/3269"
+  }
+]
+
+    return (
+        <div>
+             <Navbar user={userName}  time={time} />
+             <div id="container">
+                <Sidebar/>
+                <Content items={items} data={data} />
+            </div>
+        </div>
+    )
+}
+
+let root = ReactDOM.createRoot(document.getElementById("root"))
+root.render(<App/>)
+// App()
+// <App/>
+
+
+</script>    
+
+</html>

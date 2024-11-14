@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Components in React</title>
+    <style>
+        #theme-container-dark {
+            border: 2px solid;
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            background-color: midnightblue;
+            color: white;
+        }
+
+        #theme-container-light {
+            border: 2px solid;
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            background-color: lightblue;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+        const Counter = () => {
+
+            const [count, setCount] = React.useState(0)
+
+            function handleDecCount() {
+                setCount(count - 1)
+            }
+
+            function handlenIncCount() {
+                setCount(count + 1)
+            }
+            return (
+                <div>
+                    <button onClick={handleDecCount}>Dec</button>
+                    <h2>{count}</h2>
+                    <button onClick={handlenIncCount}>Inc</button>
+                </div>
+            )
+        }
+
+        const Theme = () => {
+
+            let [theme, setTheme] = React.useState(true);
+
+            function handleClick() {
+                setTheme(!theme)
+            }
+            return (
+                <div id={theme ? "theme-container-dark" : "theme-container-light"}>
+                    <button onClick={handleClick} >{theme ? "true" : "false"}</button>
+                    <div><h2>Hello World</h2></div>
+
+                </div>
+            )
+        }
+        const App = () => {
+            let [myswitch, setMyswitch] = React.useState(true)
+
+            function handleSwitch() {
+                setMyswitch(!myswitch)
+
+            }
+            return (
+                <div>
+                    <button onClick={handleSwitch}>Switch Page</button>
+                    {
+                        myswitch ? <Counter /> : <Theme />
+                    }
+                </div>
+            )
+        }
+
+
+        let root = ReactDOM.createRoot(document.getElementById("root"))
+        root.render(<App />)
+    </script>
+</body>
+
+</html>
